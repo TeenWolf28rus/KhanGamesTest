@@ -1,5 +1,5 @@
-﻿using Source.Game.HUD;
-using Source.Game.Map.MapGameLogic;
+﻿using Source.Game.Map.MapGameLogic;
+using Source.Game.NewHUD;
 using Source.Game.Player;
 using UnityEngine;
 using Zenject;
@@ -10,7 +10,7 @@ namespace Source.Game.Level.Installers
     {
         [SerializeField] private MapView _mapView;
         [SerializeField] private PlayerView _playerView;
-        [SerializeField] private HUDView _hudView;
+        [SerializeField] private NewHUDView _hudView;
 
         public override void InstallBindings()
         {
@@ -36,10 +36,10 @@ namespace Source.Game.Level.Installers
             Container.Bind<PlayerModel>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle().WithArguments(_playerView);
         }
-        
+
         private void BindHUD()
         {
-            Container.BindInterfacesAndSelfTo<HUDController>().AsSingle().WithArguments(_hudView);
+            Container.BindInterfacesAndSelfTo<NewHUDController>().AsSingle().WithArguments(_hudView);
         }
     }
 }
