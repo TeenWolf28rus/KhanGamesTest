@@ -1,5 +1,5 @@
 ﻿using Source.Game.Configs;
-using Source.Game.Map.Generation;
+using Source.Game.Input;
 using Source.Game.Map.Generation.Data;
 using Source.Game.Map.Generation.Interfaces;
 using Source.Game.Map.Generation.Random;
@@ -12,6 +12,7 @@ namespace Source.Game.Installers
     {
         public override void InstallBindings()
         {
+            BindInput();
             BindMapGeneration();
         }
 
@@ -34,6 +35,11 @@ namespace Source.Game.Installers
                     break;
                 }
             }
+        }
+
+        private void BindInput()
+        {
+            Container.BindInterfacesAndSelfTo<InputController>().AsSingle();
         }
     }
 }

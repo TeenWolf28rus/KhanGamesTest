@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Source.Game.Map.Configs;
 using Source.Game.Map.Data;
 using UnityEngine;
@@ -12,13 +13,14 @@ namespace Source.Game.Map.MapGameLogic
         private Stack<SpriteRenderer> _tilesPool = new();
         private SpriteRenderer[,] _activeTiles = new SpriteRenderer[0, 0];
         private MapConfig _mapConfig;
+        private Vector2 startOffset = new Vector2();
 
         public void Init(MapConfig mapConfig)
         {
             _mapConfig = mapConfig;
         }
 
-        public void Display(int[,] mapMatrix)
+        public void Create(int[,] mapMatrix)
         {
             ReturnAllToPool();
 
@@ -26,7 +28,7 @@ namespace Source.Game.Map.MapGameLogic
             var columns = mapMatrix.GetLength(1);
             _activeTiles = new SpriteRenderer[rows, columns];
 
-            var startPosition = new Vector2(-(columns - 1) / 2f, (rows - 1) / 2f);
+            startOffset = new Vector2(-(columns - 1) / 2f, (rows - 1) / 2f);
 
             for (int r = 0; r < rows; r++)
             {
@@ -34,7 +36,7 @@ namespace Source.Game.Map.MapGameLogic
                 {
                     var tile = GetTile();
                     tile.gameObject.SetActive(true);
-                    tile.transform.localPosition = startPosition + new Vector2(c, -r);
+                    tile.transform.localPosition = startOffset + new Vector2(c, -r);
 
                     var tileType = (EMapTileType)mapMatrix[r, c];
                     var tileData = _mapConfig.GetTileData(tileType);
@@ -70,6 +72,21 @@ namespace Source.Game.Map.MapGameLogic
             }
 
             _activeTiles = new SpriteRenderer[0, 0];
+        }
+
+        public bool TryGetIndexesBy(Vector2 position, out Vector2Int indexes)
+        {
+            var value = position - startOffset;
+
+            indexes = new Vector2Int(-(int)Math.Round(value.y, MidpointRounding.AwayFromZero),
+                (int)Math.Round(value.x, MidpointRounding.AwayFromZero));
+
+            Debug.Log(indexes);
+
+            var rows = _activeTiles.GetLength(0);
+            var columns = _activeTiles.GetLength(1);
+            if (indexes.x < 0 || indexes.x >= rows || indexes.y < 0 || indexes.y >= columns) return false;
+            return true;
         }
     }
 }
