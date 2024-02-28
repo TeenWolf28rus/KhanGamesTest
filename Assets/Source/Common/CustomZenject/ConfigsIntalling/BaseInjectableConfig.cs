@@ -1,6 +1,8 @@
-﻿namespace a;
+﻿using UnityEngine;
 
-public class BaseInjectableConfig
+namespace Source.Common.CustomZenject.ConfigsIntalling
 {
-    
+    public class BaseInjectableConfig:ScriptableObject
+    {
+    }
 }
