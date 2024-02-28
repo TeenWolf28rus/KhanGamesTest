@@ -72,10 +72,10 @@ namespace Source.Game.Map.MapGameLogic
 
         public bool HasObstacleOn(Vector2Int startIndexes, Vector2Int targetIndexes)
         {
-            var sR = startIndexes.x < targetIndexes.x ? startIndexes.x : targetIndexes.x;
-            var tR = startIndexes.x < targetIndexes.x ? targetIndexes.x : startIndexes.x;
-            var sC = startIndexes.y < targetIndexes.y ? startIndexes.y : targetIndexes.y;
-            var tC = startIndexes.y < targetIndexes.y ? targetIndexes.y : startIndexes.y;
+            var sR = startIndexes.x <= targetIndexes.x ? startIndexes.x : targetIndexes.x;
+            var tR = startIndexes.x <= targetIndexes.x ? targetIndexes.x : startIndexes.x;
+            var sC = startIndexes.y <= targetIndexes.y ? startIndexes.y : targetIndexes.y;
+            var tC = startIndexes.y <= targetIndexes.y ? targetIndexes.y : startIndexes.y;
 
             for (int r = sR; r <= tR; r++)
             {
@@ -94,10 +94,10 @@ namespace Source.Game.Map.MapGameLogic
         {
             int cost = 0;
 
-            var sR = startIndexes.x < targetIndexes.x ? startIndexes.x : targetIndexes.x;
-            var tR = startIndexes.x < targetIndexes.x ? targetIndexes.x : startIndexes.x;
-            var sC = startIndexes.y < targetIndexes.y ? targetIndexes.y : startIndexes.y;
-            var tC = startIndexes.y < targetIndexes.y ? targetIndexes.y : startIndexes.y;
+            var sR = startIndexes.x <= targetIndexes.x ? startIndexes.x : targetIndexes.x;
+            var tR = startIndexes.x <= targetIndexes.x ? targetIndexes.x : startIndexes.x;
+            var sC = startIndexes.y <= targetIndexes.y ? startIndexes.y : targetIndexes.y;
+            var tC = startIndexes.y <= targetIndexes.y ? targetIndexes.y : startIndexes.y;
 
             for (int r = sR; r <= tR; r++)
             {

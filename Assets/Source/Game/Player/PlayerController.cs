@@ -64,9 +64,30 @@ namespace Source.Game.Player
 
             if (tileIndex == _model.CurrentInMapIndexes) return;
             if (tileIndex.x != _model.CurrentInMapIndexes.x && tileIndex.y != _model.CurrentInMapIndexes.y) return;
-            if (_mapController.HasObstacleOn(_model.CurrentInMapIndexes, tileIndex)) return;
+    
+            //correcting for no use in calc current indexed tile
+            var firstStepIdx = new Vector2Int(_model.CurrentInMapIndexes.x, _model.CurrentInMapIndexes.y);
+            if (firstStepIdx.x < tileIndex.x)
+            {
+                firstStepIdx.x += 1;
+            }
+            else if (firstStepIdx.x > tileIndex.x)
+            {
+                firstStepIdx.x -= 1;
+            }
 
-            var pathCost = _mapController.CalculateCosts(_model.CurrentInMapIndexes, tileIndex);
+            if (firstStepIdx.y < tileIndex.y)
+            {
+                firstStepIdx.y += 1;
+            }
+            else if (firstStepIdx.y > tileIndex.y)
+            {
+                firstStepIdx.y -= 1;
+            }
+
+            if (_mapController.HasObstacleOn(firstStepIdx, tileIndex)) return;
+
+            var pathCost = _mapController.CalculateCosts(firstStepIdx, tileIndex);
             if (pathCost > _model.MovePoints) return;
 
             _model.SetCurrentInMapIndexes(tileIndex);

@@ -8,15 +8,13 @@ namespace Source.Game.Level
 {
     public class LevelController : IInitializable, IDisposable
     {
-        private readonly LevelView _view;
         private readonly MapController _mapController;
         private readonly InputController _inputController;
         private readonly PlayerController _playerController;
 
-        public LevelController(LevelView view, MapController mapController, InputController inputController,
+        public LevelController(MapController mapController, InputController inputController,
             PlayerController playerController)
         {
-            _view = view;
             _mapController = mapController;
             _inputController = inputController;
             _playerController = playerController;
@@ -31,6 +29,17 @@ namespace Source.Game.Level
 
         public void Dispose()
         {
+        }
+
+        public void EndTurn()
+        {
+            _playerController.EndTurn();
+        }
+
+        public void Restart()
+        {
+            _mapController.CreateMap();
+            _playerController.StartGame();
         }
     }
 }
