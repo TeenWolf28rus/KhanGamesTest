@@ -6,18 +6,18 @@ namespace Source.Common.CustomZenject.ConfigsIntalling.Installers
     [CreateAssetMenu(menuName = "Game/CustomZenject/" + nameof(ConfigsInstaller), fileName = nameof(ConfigsInstaller))]
     public class ConfigsInstaller : ScriptableObjectInstaller<ConfigsInstaller>
     {
-        [SerializeField] private BaseInjectableConfig[] configs;
+        [SerializeField] private BaseInjectableConfig[] _configs;
 
         public override void InstallBindings()
         {
-            for (int i = 0; i < configs.Length; i++)
+            for (int i = 0; i < _configs.Length; i++)
             {
-                if (configs[i] == null)
+                if (_configs[i] == null)
                 {
                     Debug.LogError($"Config at {i} index doesn't exist, please fix it!", this);
                 }
 
-                Container.Bind(configs[i].GetType()).FromInstance(configs[i]).AsSingle().NonLazy();
+                Container.Bind(_configs[i].GetType()).FromInstance(_configs[i]).AsSingle().NonLazy();
             }
         }
     }
