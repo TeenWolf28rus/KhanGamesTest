@@ -8,7 +8,6 @@ namespace Source.Common.Utils
     {
         public static T GetRandomIndexBy<T>(List<WeightedData<T>> data)
         {
-
             var totalWeight = 0;
             foreach (var d in data)
             {
@@ -29,6 +28,13 @@ namespace Source.Common.Utils
             }
 
             return default;
+        }
+
+        public static bool CheckOutOfBounds<T>(T[,] mat, int row, int col)
+        {
+            var rows = mat.GetLength(0);
+            var columns = mat.GetLength(1);
+            return row < 0 || row >= rows || col < 0 || col >= columns;
         }
     }
 }

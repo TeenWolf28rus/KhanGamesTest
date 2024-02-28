@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Source.Common.Utils;
 using Source.Game.Map.Configs;
 using Source.Game.Map.Data;
 using UnityEngine;
@@ -42,6 +43,7 @@ namespace Source.Game.Map.MapGameLogic
                     var tileData = _mapConfig.GetTileData(tileType);
 
                     tile.color = tileData?.Color ?? Color.white;
+                    _activeTiles[r, c] = tile;
                 }
             }
         }
@@ -81,11 +83,16 @@ namespace Source.Game.Map.MapGameLogic
             indexes = new Vector2Int(-(int)Math.Round(value.y, MidpointRounding.AwayFromZero),
                 (int)Math.Round(value.x, MidpointRounding.AwayFromZero));
 
-            Debug.Log(indexes);
+            if (Utils.CheckOutOfBounds(_activeTiles, indexes.x, indexes.y)) return false;
+            return true;
+        }
 
-            var rows = _activeTiles.GetLength(0);
-            var columns = _activeTiles.GetLength(1);
-            if (indexes.x < 0 || indexes.x >= rows || indexes.y < 0 || indexes.y >= columns) return false;
+        public bool TryGetPositionBy(Vector2Int indexes, out Vector2 position)
+        {
+            position = Vector2.zero;
+            if (Utils.CheckOutOfBounds(_activeTiles, indexes.x, indexes.y)) return false;
+
+            position = _activeTiles[indexes.x, indexes.y].transform.position;
             return true;
         }
     }
