@@ -1,7 +1,7 @@
 ﻿using Source.Common.CustomZenject.ConfigsIntalling;
 using UnityEngine;
 
-namespace Source.Game.MapLogic.Generation.Configs
+namespace Source.Game.Map.Generation.Configs
 {
     [CreateAssetMenu(menuName = "Game/Configs/MapGen/" + nameof(RandomMapGenerationConfig),
         fileName = nameof(RandomMapGenerationConfig))]

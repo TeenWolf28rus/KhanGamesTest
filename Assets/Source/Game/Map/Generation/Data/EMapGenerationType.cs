@@ -1,4 +1,4 @@
-﻿namespace Source.Game.MapLogic.Generation.Data
+﻿namespace Source.Game.Map.Generation.Data
 {
     public enum EMapGenerationType
     {

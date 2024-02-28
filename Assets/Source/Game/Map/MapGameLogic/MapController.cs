@@ -1,17 +1,17 @@
 ﻿using System;
-using Source.Game.MapLogic.Generation.Interfaces;
-using UnityEngine;
 using Zenject;
 
 namespace Source.Game.Map.MapGameLogic
 {
     public class MapController : IInitializable, IDisposable
     {
-        private readonly IMapGenerator _mapGenerator;
+        private readonly MapView _view;
+        private readonly MapModel _model;
 
-        public MapController(IMapGenerator mapGenerator)
+        public MapController(MapView view, MapModel model)
         {
-            _mapGenerator = mapGenerator;
+            _view = view;
+            _model = model;
         }
 
         public void Initialize()
@@ -22,10 +22,10 @@ namespace Source.Game.Map.MapGameLogic
         {
         }
 
-        public void CreateMap(Transform mapContainer)
+        public void CreateMap()
         {
-            var mapMatrix = _mapGenerator.Generate();
-            Debug.Log(mapMatrix);
+            _model.RecreateMap();
+            _view.Display(_model.MapMatrix);
         }
     }
 }

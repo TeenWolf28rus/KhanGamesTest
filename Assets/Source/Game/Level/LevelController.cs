@@ -16,8 +16,8 @@ namespace Source.Game.Level
         }
 
         public void Initialize()
-        {   
-            _mapController.CreateMap(_view.MapContainer);
+        {
+            _mapController.CreateMap();
         }
 
         public void Dispose()

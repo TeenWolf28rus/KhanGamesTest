@@ -1,7 +1,7 @@
 ﻿using Source.Game.Configs;
-using Source.Game.MapLogic.Generation;
-using Source.Game.MapLogic.Generation.Data;
-using Source.Game.MapLogic.Generation.Interfaces;
+using Source.Game.Map.Generation;
+using Source.Game.Map.Generation.Data;
+using Source.Game.Map.Generation.Interfaces;
 using UnityEngine;
 using Zenject;
 

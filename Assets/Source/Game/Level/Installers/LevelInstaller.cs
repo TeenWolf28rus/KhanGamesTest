@@ -7,6 +7,8 @@ namespace Source.Game.Level.Installers
     public class LevelInstaller : MonoInstaller
     {
         [SerializeField] private LevelView _levelView;
+        [SerializeField] private MapView _mapView;
+
         public override void InstallBindings()
         {
             BindMap();
@@ -15,7 +17,8 @@ namespace Source.Game.Level.Installers
 
         private void BindMap()
         {
-            Container.BindInterfacesAndSelfTo<MapController>().AsSingle();
+            Container.Bind<MapModel>().AsSingle();
+            Container.BindInterfacesAndSelfTo<MapController>().AsSingle().WithArguments(_mapView);
         }
 
         private void BindLevel()

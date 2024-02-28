@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913d2bb0ebe048008a04d48d5d77f805, type: 3}
   m_Name: RandomMapGenerationConfig
   m_EditorClassIdentifier: 
-  mapSize: {x: 5, y: 5}
+  mapSize: {x: 16, y: 9}

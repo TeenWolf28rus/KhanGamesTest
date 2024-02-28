@@ -1,4 +1,4 @@
-﻿namespace Source.Game.MapLogic.Generation.Interfaces
+﻿namespace Source.Game.Map.Generation.Interfaces
 {
     public interface IMapGenerator
     {

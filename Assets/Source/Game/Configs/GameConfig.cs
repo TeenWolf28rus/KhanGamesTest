@@ -1,5 +1,5 @@
 ﻿using Source.Common.CustomZenject.ConfigsIntalling;
-using Source.Game.MapLogic.Generation.Data;
+using Source.Game.Map.Generation.Data;
 using UnityEngine;
 
 namespace Source.Game.Configs
