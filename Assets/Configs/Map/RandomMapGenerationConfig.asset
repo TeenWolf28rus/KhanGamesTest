@@ -13,3 +13,10 @@ MonoBehaviour:
   m_Name: RandomMapGenerationConfig
   m_EditorClassIdentifier: 
   mapSize: {x: 16, y: 9}
+  tilesData:
+  - Value: 0
+    Weight: 70
+  - Value: 1
+    Weight: 40
+  - Value: 2
+    Weight: 10

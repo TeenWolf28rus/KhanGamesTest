@@ -2,6 +2,7 @@
 using Source.Game.Map.Generation;
 using Source.Game.Map.Generation.Data;
 using Source.Game.Map.Generation.Interfaces;
+using Source.Game.Map.Generation.Random;
 using UnityEngine;
 using Zenject;
 

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
-using Source.Game.Map.Data;
-using Source.Game.Map.Generation.Configs;
+﻿using Source.Common.Utils;
 using Source.Game.Map.Generation.Interfaces;
+using Source.Game.Map.Generation.Random.Configs;
 
-namespace Source.Game.Map.Generation
+namespace Source.Game.Map.Generation.Random
 {
     public class RandomMapGenerator : IMapGenerator
     {
@@ -21,14 +19,14 @@ namespace Source.Game.Map.Generation
             var columns = _generationConfig.MapSize.x;
             var mapMatrix = new int[rows, columns];
 
-            var types = Enum.GetValues(typeof(EMapTileType)).Cast<EMapTileType>().ToList();
 
-            var rnd = new Random();
+            var tilesGenerationData = _generationConfig.TilesData;
+
             for (int r = 0; r < rows; r++)
             {
                 for (int c = 0; c < columns; c++)
                 {
-                    mapMatrix[r, c] = (int)types[rnd.Next(0, types.Count)];
+                    mapMatrix[r, c] = (int)Utils.GetRandomIndexBy(tilesGenerationData);
                 }
             }
 

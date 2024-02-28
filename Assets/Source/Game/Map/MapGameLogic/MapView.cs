@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Source.Game.Map.Configs;
+using Source.Game.Map.Data;
 using UnityEngine;
 
 namespace Source.Game.Map.MapGameLogic
@@ -9,6 +11,12 @@ namespace Source.Game.Map.MapGameLogic
 
         private Stack<SpriteRenderer> _tilesPool = new();
         private SpriteRenderer[,] _activeTiles = new SpriteRenderer[0, 0];
+        private MapConfig _mapConfig;
+
+        public void Init(MapConfig mapConfig)
+        {
+            _mapConfig = mapConfig;
+        }
 
         public void Display(int[,] mapMatrix)
         {
@@ -18,7 +26,7 @@ namespace Source.Game.Map.MapGameLogic
             var columns = mapMatrix.GetLength(1);
             _activeTiles = new SpriteRenderer[rows, columns];
 
-            var startPosition = new Vector2(-(columns-1) / 2f, (rows-1) / 2f);
+            var startPosition = new Vector2(-(columns - 1) / 2f, (rows - 1) / 2f);
 
             for (int r = 0; r < rows; r++)
             {
@@ -27,6 +35,11 @@ namespace Source.Game.Map.MapGameLogic
                     var tile = GetTile();
                     tile.gameObject.SetActive(true);
                     tile.transform.localPosition = startPosition + new Vector2(c, -r);
+
+                    var tileType = (EMapTileType)mapMatrix[r, c];
+                    var tileData = _mapConfig.GetTileData(tileType);
+
+                    tile.color = tileData?.Color ?? Color.white;
                 }
             }
         }
